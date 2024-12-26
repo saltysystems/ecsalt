@@ -1,11 +1,10 @@
-%%%-------------------------------------------------------------------
-%% @doc Stateful Entity Component System (ECS) for Overworld. All
-%%      state is held within the gen_server, and all ETS table
-%%      access is mediated through the ECS instance.
+%%%---------------------------------------------------------------------
+%% @doc Entity Component System (ECS) with all access proxied through a
+%%      gen_server that holds onto the ETS table reference.
 %% @end
-%%%-------------------------------------------------------------------
+%%%---------------------------------------------------------------------
 
--module(ow_ecs).
+-module(ecsalt_gs).
 
 -behaviour(gen_server).
 

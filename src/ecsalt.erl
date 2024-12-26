@@ -1,11 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc Entity Component System for Overworld without gen_server.
-%%      All ETS tables are set public and refernces are returned
-%%      directly to the caller in an opaque world() type.
+%% @doc Entity Component System
 %% @end
 %%%-------------------------------------------------------------------
 
--module(ow_ecs2).
+-module(ecsalt).
 
 %% API
 -export([start/0, stop/1]).
