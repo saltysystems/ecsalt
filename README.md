@@ -59,9 +59,9 @@ that checks if the cat is on fire and updates their HP accordingly:
       ecsalt:add_component(hp, HP - 10, ID, World)
     end.
 #Fun<erl_eval.41.39164016>
-10> System = fun(Data, World) ->
+10> System = fun(_Data, World) ->
       Matches = ecsalt:match_components([hp, burning], World),
-      lists:foreach(G, Data)
+      lists:foreach(G, Matches)
     end.
 #Fun<erl_eval.41.39164016>
 11> World1 = ecsalt:add_system(System, World).
