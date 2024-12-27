@@ -126,6 +126,7 @@ match_component(ComponentName, WorldRef) ->
 
 -spec match_components([term()], world_ref()) -> [entity()].
 match_components(List, WorldRef) ->
+    io:format("List: ~p~n", [List]),
     % Multi-match. Try to match several components and return the common
     % elements. Use sets v2 introduced in OTP 24
     Sets = [
@@ -200,10 +201,10 @@ del_system(System, WorldRef) ->
 
 -spec proc(world_ref()) -> any().
 proc(WorldRef) ->
-    proc(WorldRef, []).
+    proc([], WorldRef).
 
--spec proc(world_ref(), any()) -> [any()].
-proc(WorldRef, Data) ->
+-spec proc(any(), world_ref()) -> [any()].
+proc(Data, WorldRef) ->
     Systems = gen_server:call(WorldRef, systems),
     Fun = fun({_Prio, Sys}, Acc) ->
         Result =
@@ -211,9 +212,9 @@ proc(WorldRef, Data) ->
                 {M, F, 1} ->
                     erlang:apply(M, F, [WorldRef]);
                 {M, F, 2} ->
-                    erlang:apply(M, F, [WorldRef, Data]);
+                    erlang:apply(M, F, [Data, WorldRef]);
                 Fun2 ->
-                    Fun2(WorldRef, Data)
+                    Fun2(Data, WorldRef)
             end,
         [{Sys, Result} | Acc]
     end,
